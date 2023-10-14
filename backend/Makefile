@@ -6,6 +6,9 @@ build:
 run:
 	go run main.go
 	
+run-dev:
+	docker-compose -f ./docker-compose.dev.yaml up -d
+
 test:
 	echo ${DB_STRING}
 	

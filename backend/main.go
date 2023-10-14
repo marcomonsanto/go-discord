@@ -24,9 +24,17 @@ type User struct {
 }
 
 func main() {
-	err := godotenv.Load()
+	env := os.Getenv("APP_ENV")
+
+	fmt.Printf("what %s", env)
+
+	// Determine the corresponding environment file based on the environment.
+	envFile := ".env." + env
+
+	// Load the environment variables from the specified file.
+	err := godotenv.Load(envFile)
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatalf("Error loading .env file: %s", err)
 	}
 
 	dbString := os.Getenv("DB_STRING")
@@ -60,6 +68,10 @@ func main() {
 			return
 		}
 		json.NewEncoder(w).Encode(users)
+	})
+
+	http.HandleFunc("/health", func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusOK)
 	})
 
 	fmt.Println("Litening on port 8080")

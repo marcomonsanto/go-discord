@@ -5,3 +5,4 @@ backend/bin
 frontend/node_modules
 
 .env.local
+.env.development
