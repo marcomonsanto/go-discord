@@ -1,11 +1,14 @@
-include .env
+include .env.development
 
 build:
 	go build -o bin/main main.go
 	
 run:
 	go run main.go
-	
+
+build-dev:
+	docker build -f Dockerfile.dev -t go-discord-be:dev .
+
 run-dev:
 	docker-compose -f ./docker-compose.dev.yaml up -d
 

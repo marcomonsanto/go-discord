@@ -1,9 +1,9 @@
 services:
   web:
-    build:
-      context: .
-      # Correct the path to your Dockerfile
-      dockerfile: Dockerfile.dev
+    image: go-discord-be:dev
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile.dev
     ports:
       - 8080:8080
     # Important to bind/mount your codebase dir to /app dir for live reload
